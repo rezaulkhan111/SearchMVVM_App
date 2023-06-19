@@ -1,15 +1,19 @@
 package com.example.androidrepositories.ui.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidrepositories.R
@@ -44,43 +48,59 @@ class HomeFragment : Fragment(), RepositoryCallback {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        navController = NavHostFragment.findNavController(this)
-
+        navController = findNavController()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         repoAdapter = RepositoryAdapter(this)
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         viewModelGitHub.getOfflineRepositories().observe(viewLifecycleOwner) {
             listRepositoryDet = it.getItems()!!
-            setAdapterData(listRepositoryDet)
+            setUAdapterData()
         }
 
+        binding.tietSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                binding.tilSearchHeader.error = null
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                binding.tilSearchHeader.error = null
+            }
+        })
+
         binding.ibSearch.setOnClickListener {
-            if (System.currentTimeMillis() - lastRefreshTime >= 30 * 60 * 1000) {
-                lastRefreshTime = System.currentTimeMillis()
-                fetchRepositories()
+            qSearchWord = binding.tietSearch.text.toString()
+            if (qSearchWord.isNotEmpty()) {
+                if (System.currentTimeMillis() - lastRefreshTime >= 30 * 60 * 1000) {
+                    lastRefreshTime = System.currentTimeMillis()
+                    fetchRepositories()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Next 30 minutes later can refresh the data",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Next 30 minutes later can refresh the data",
-                    Toast.LENGTH_SHORT
-                ).show()
+                binding.tilSearchHeader.error = "Please search anything"
             }
         }
 
         binding.ibSort.setOnClickListener {
             val sortRepository =
                 listRepositoryDet.sortedByDescending { it.getStargazersCount() }.toMutableList()
-            setAdapterData(sortRepository)
+            listRepositoryDet = sortRepository
+            setUAdapterData()
         }
         binding.rvRepository.addOnScrollListener(onScrollListener)
     }
-
 
     private val onScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -98,7 +118,6 @@ class HomeFragment : Fragment(), RepositoryCallback {
     }
 
     private fun fetchRepositories() {
-        qSearchWord = binding.tietSearch.text.toString()
         viewModelGitHub.fetchRepositories(
             qSearchWord, currentPage, perPage
         ).observe(viewLifecycleOwner) {
@@ -108,7 +127,7 @@ class HomeFragment : Fragment(), RepositoryCallback {
                 binding.progressBar.visibility = View.GONE
                 listRepositoryDet = it.data.getItems()!!
 
-                setAdapterData(listRepositoryDet)
+                setUAdapterData()
             }
         }
     }
@@ -133,19 +152,21 @@ class HomeFragment : Fragment(), RepositoryCallback {
         }
     }
 
-    private fun setAdapterData(listRepositoryDet: MutableList<RepositoryDetails>) {
-        repoAdapter.setRepository(listRepositoryDet)
-        binding.rvRepository.layoutManager = layoutManager
-        binding.rvRepository.adapter = repoAdapter
-    }
-
     private fun setUAdapterData() {
         repoAdapter.setRepository(listRepositoryDet)
         binding.rvRepository.layoutManager = layoutManager
         binding.rvRepository.adapter = repoAdapter
+
+        val targetItemView = layoutManager.findViewByPosition(vmShared.currentViewItemPosition)
+        val recyclerViewHeight = binding.rvRepository.height
+        val targetTop = targetItemView?.top ?: 0
+        val targetHeight = targetItemView?.height ?: 0
+        val targetAtUICenter = targetTop + targetHeight / 2 + recyclerViewHeight / 2
+        layoutManager.scrollToPositionWithOffset(vmShared.currentViewItemPosition, targetAtUICenter)
     }
 
     override fun repositoryItemClick(repositoryModel: RepositoryDetails, position: Int) {
+        vmShared.currentViewItemPosition = position
         vmShared.sharedData = AppConstant.getJsonStringToObject(repositoryModel)
         navController.navigate(R.id.home_to_details)
     }

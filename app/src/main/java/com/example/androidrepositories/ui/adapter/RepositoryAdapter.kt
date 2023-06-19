@@ -37,10 +37,6 @@ class RepositoryAdapter(private val repositoryCallback: RepositoryCallback) :
         notifyDataSetChanged()
     }
 
-    fun getRepository(): MutableList<RepositoryDetails> {
-        return listRepositoryDet
-    }
-
     override fun onBindViewHolder(holder: RepositoryVH, position: Int) {
         try {
             holder.onBind(position)

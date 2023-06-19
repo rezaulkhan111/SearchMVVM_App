@@ -7,4 +7,5 @@ import javax.inject.Inject
 @HiltViewModel
 class SharedVM @Inject constructor() : ViewModel() {
     var sharedData: String = ""
+    var currentViewItemPosition = 0
 }
