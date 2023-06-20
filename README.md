@@ -36,16 +36,27 @@ This project are build for searching on GitHub
 
 # MVVM Architectural pattern
 
-<img src="https://miro.medium.com/max/2400/1*-yY0l4XD3kLcZz0rO1sfRA.png" width="960" height="720" />
+<img src="https://miro.medium.com/v2/resize:fit:2400/1*-yY0l4XD3kLcZz0rO1sfRA.png" width="960" height="720" />
 
-## Used Technology
-a) MVVM Architecture<br/>
-b) Hilt for Dependency Injection <br/>
-c) Retrofit<br/>
-d) Room Db for data caching <br/>
-e) jetpack navigation
-f) viewbinding <br/>
-g) sharedViewModel
+## Tech-stack
+* Tech-stack
+    * Kotlin - a cross-platform, statically typed, general-purpose programming language with type inference.
+    * Coroutines - perform background operations.
+    * Flow - handle the stream of data asynchronously that executes sequentially.
+    * Dagger hilt - a pragmatic lightweight dependency injection framework.
+    * Jetpack
+        * Room - a persistence library provides an abstraction layer over SQLite.
+        * LiveData - is an observable data holder.
+        * Lifecycle - perform action when lifecycle state changes.
+        * ViewModel - store and manage UI-related data in a lifecycle conscious way.
+        * Navigation component - displays fragment destinations
+    
+* Architecture 
+   * Clean Architecture
+   * MVVM - Model View View Model
+
+### Network Bound Resource
+   [Network Bound Resource](https://medium.com/android-news/making-android-jetpacks-networkboundresource-work-in-offline-mode-fd06ef545ec1)
 
 ## License
 open source projects.
