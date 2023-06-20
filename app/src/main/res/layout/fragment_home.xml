@@ -11,7 +11,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Search"
+        android:layout_margin="5dp"
+        android:hint="@string/text_search"
         app:layout_constraintEnd_toStartOf="@+id/ib_search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -50,6 +51,7 @@
         android:id="@+id/rv_repository"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_search_header" />
 
