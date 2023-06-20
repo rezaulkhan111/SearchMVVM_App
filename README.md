@@ -33,12 +33,7 @@ This project are build for searching on GitHub
   </a>
 </p>
 
-
-# MVVM Architectural pattern
-
-<img src="https://miro.medium.com/v2/resize:fit:2400/1*-yY0l4XD3kLcZz0rO1sfRA.png" width="960" height="720" />
-
-## Tech-stack
+## Used Tech-stack
 * Tech-stack
     * Kotlin - a cross-platform, statically typed, general-purpose programming language with type inference.
     * Coroutines - perform background operations.
@@ -52,10 +47,11 @@ This project are build for searching on GitHub
         * Navigation component - displays fragment destinations
     
 * Architecture 
-   * MVVM - Model View View Model
+   * [MVVM](https://miro.medium.com/v2/resize:fit:2400/1*-yY0l4XD3kLcZz0rO1sfRA.png) - Model View View Model
 
 ### Network Bound Resource
-   [Network Bound Resource](https://medium.com/android-news/making-android-jetpacks-networkboundresource-work-in-offline-mode-fd06ef545ec1)
+
+   [Network Bound Resource](https://medium.com/android-news/making-android-jetpacks-networkboundresource-work-in-offline-mode-fd06ef545ec1) An algorithm that provides an easy function to fetch resources from both the database and the network.
 
 ## License
 open source projects.
