@@ -39,6 +39,7 @@ This project are build for searching on GitHub
     * Coroutines - perform background operations.
     * Flow - handle the stream of data asynchronously that executes sequentially.
     * Dagger hilt - a pragmatic lightweight dependency injection framework.
+    * [Network Bound Resource](https://medium.com/android-news/making-android-jetpacks-networkboundresource-work-in-offline-mode-fd06ef545ec1) An algorithm that provides an easy function to fetch resources from both the database and the network.
     * Jetpack
         * Room - a persistence library provides an abstraction layer over SQLite.
         * LiveData - is an observable data holder.
@@ -48,10 +49,3 @@ This project are build for searching on GitHub
     
 * Architecture 
    * [MVVM](https://miro.medium.com/v2/resize:fit:2400/1*-yY0l4XD3kLcZz0rO1sfRA.png) - Model View View Model
-
-### Network Bound Resource
-
-   [Network Bound Resource](https://medium.com/android-news/making-android-jetpacks-networkboundresource-work-in-offline-mode-fd06ef545ec1) An algorithm that provides an easy function to fetch resources from both the database and the network.
-
-## License
-open source projects.
