@@ -52,7 +52,6 @@ This project are build for searching on GitHub
         * Navigation component - displays fragment destinations
     
 * Architecture 
-   * Clean Architecture
    * MVVM - Model View View Model
 
 ### Network Bound Resource
