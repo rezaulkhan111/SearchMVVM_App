@@ -1,12 +1,11 @@
 package com.example.androidrepositories.ui.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidrepositories.data.model.RepositoryDetails
-import com.example.androidrepositories.databinding.RvRepositoryItemBinding
+import com.example.androidrepositories.databinding.RvViewItem1Binding
 import com.example.androidrepositories.ui.callback.RepositoryCallback
 import com.example.androidrepositories.utils.AppConstant
 
@@ -17,7 +16,7 @@ class RepositoryAdapter(private val repositoryCallback: RepositoryCallback) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryVH {
         return RepositoryVH(
-            RvRepositoryItemBinding.inflate(
+            RvViewItem1Binding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
@@ -48,7 +47,7 @@ class RepositoryAdapter(private val repositoryCallback: RepositoryCallback) :
         }
     }
 
-    inner class RepositoryVH(val binding: RvRepositoryItemBinding) : BaseViewHolder(binding.root) {
+    inner class RepositoryVH(val binding: RvViewItem1Binding) : BaseViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
         override fun onBind(position: Int) {

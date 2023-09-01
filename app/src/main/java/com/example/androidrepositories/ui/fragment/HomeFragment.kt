@@ -3,12 +3,10 @@ package com.example.androidrepositories.ui.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -20,7 +18,7 @@ import com.example.androidrepositories.R
 import com.example.androidrepositories.data.Status
 import com.example.androidrepositories.data.model.RepositoryDetails
 import com.example.androidrepositories.databinding.FragmentHomeBinding
-import com.example.androidrepositories.ui.adapter.RepositoryAdapter
+import com.example.androidrepositories.ui.adapter.MultiLayoutVBAdapter
 import com.example.androidrepositories.ui.callback.RepositoryCallback
 import com.example.androidrepositories.utils.AppConstant
 import com.example.androidrepositories.view_model.GithubVM
@@ -34,7 +32,11 @@ class HomeFragment : Fragment(), RepositoryCallback {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var navController: NavController
-    private lateinit var repoAdapter: RepositoryAdapter
+
+    //    private lateinit var repoAdapter: RepositoryAdapter
+//    private lateinit var repoAdapter: MultipleViewAdapter
+    private lateinit var repoAdapter: MultiLayoutVBAdapter
+
     private lateinit var layoutManager: LinearLayoutManager
     private var listRepositoryDet: MutableList<RepositoryDetails> = mutableListOf()
     private var lastRefreshTime: Long = 0
@@ -54,7 +56,9 @@ class HomeFragment : Fragment(), RepositoryCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        repoAdapter = RepositoryAdapter(this)
+//        repoAdapter = RepositoryAdapter(this)
+//        repoAdapter = MultipleViewAdapter(this)
+        repoAdapter = MultiLayoutVBAdapter(this)
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         viewModelGitHub.getOfflineRepositories().observe(viewLifecycleOwner) {

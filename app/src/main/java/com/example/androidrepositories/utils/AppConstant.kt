@@ -12,6 +12,9 @@ import java.text.SimpleDateFormat
 
 
 object AppConstant {
+    val VIEW_TYPE = 0
+    val VIEW_TYPE1 = 1
+    val VIEW_TYPE2 = 2
 
     @SuppressLint("SimpleDateFormat")
     fun getSortDataTime(strDate: String): String {

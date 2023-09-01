@@ -14,6 +14,9 @@ class RepositoryDetails {
     @Transient
     private var repositoryTableId: Long? = null
 
+    @ColumnInfo(name = "viewType")
+    private var viewType: Int? = null
+
     @SerializedName("id")
     @Expose
     private var id: Int? = null
@@ -106,6 +109,14 @@ class RepositoryDetails {
 
     fun setRepositoryTableId(repositoryTableId: Long?) {
         this.repositoryTableId = repositoryTableId
+    }
+
+    fun getViewType(): Int? {
+        return viewType
+    }
+
+    fun setViewType(viewType: Int?) {
+        this.viewType = viewType
     }
 
     fun getId(): Int? {
